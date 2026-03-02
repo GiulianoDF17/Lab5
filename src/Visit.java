@@ -37,12 +37,15 @@ public class Visit {
     }
 
     public double getTotalExpense(){
-        double totalExpense = productExpense + serviceExpense;
-        return totalExpense;
+        double serviceDiscount = serviceExpense * DiscountRate.getServiceDiscountRate(customer.getMemberType());
+
+        double productDiscount = productExpense * DiscountRate.getProductDiscountRade(customer.getMemberType());
+
+        return (serviceExpense - serviceDiscount) + (productExpense - productDiscount);
     }
 
     @Override
     public String toString(){
-        return "Visit[customer=" + customer + ", date=" + date ", totalExpense=" + getTotalExpense() + "]";
+        return "Visit[customer=" + customer + ", date=" + date + ", totalExpense=" + getTotalExpense() + "]";
     }
 }
